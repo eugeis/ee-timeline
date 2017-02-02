@@ -1,1 +1,1 @@
-include 'ee-timeline', 'ee-timeline_json', 'ee-timeline_des'
+include 'ee-timeline_des', 'ee-timeline', 'ee-timeline_json'

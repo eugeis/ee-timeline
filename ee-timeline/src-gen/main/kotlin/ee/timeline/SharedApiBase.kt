@@ -1,63 +1,34 @@
 package ee.timeline
 
-import java.util.*
-
-data class Text(var title: String = "", var text: String = "") {
-    companion object {
-        val EMPTY = Text()
-    }
+import java.net.URL
+import java.util.Date
 
 
 
-}
-
-fun Text?.orEmpty(): Text {
-    return if (this != null) this else Text.EMPTY
-}
-
-data class Media(var url: String = "", var caption: String = "", var credit: String = "", var thumbnail: String = "") {
-    companion object {
-        val EMPTY = Media()
-    }
-
-
-
-}
-
-fun Media?.orEmpty(): Media {
-    return if (this != null) this else Media.EMPTY
-}
 
 open class TimeEvents {
-    companion object {
-        val EMPTY = TimeEvents()
-    }
-    var title: TimeEvent = TimeEvent.EMPTY
-    var events: MutableList<TimeEvent> = arrayListOf()
-    var eras: MutableList<Era> = arrayListOf()
+    var title: TimeEvent
+    var events: MutableList<Era>
+    var eras: MutableList<Era>
 
-    constructor(title: TimeEvent = TimeEvent.EMPTY, events: MutableList<TimeEvent> = arrayListOf(), 
-        eras: MutableList<Era> = arrayListOf()) {
+
+    constructor(title: TimeEvent = TimeEvent.EMPTY, events: MutableList<Era> = arrayListOf(), eras: MutableList<Era> = arrayListOf()) {
         this.title = title
         this.events = events
         this.eras = eras
     }
 
-
-
+    companion object {
+        val EMPTY = TimeEvents()
+    }
 }
 
-fun TimeEvents?.orEmpty(): TimeEvents {
-    return if (this != null) this else TimeEvents.EMPTY
-}
 
 open class Era {
-    companion object {
-        val EMPTY = Era()
-    }
-    var start: Date = Date()
-    var end: Date = Date()
-    var text: Text = Text.EMPTY
+    var start: Date
+    var end: Date
+    var text: Text
+
 
     constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY) {
         this.start = start
@@ -65,32 +36,65 @@ open class Era {
         this.text = text
     }
 
-
-
-}
-
-fun Era?.orEmpty(): Era {
-    return if (this != null) this else Era.EMPTY
-}
-
-open class TimeEvent : Era {
     companion object {
-        val EMPTY = TimeEvent()
+        val EMPTY = Era()
     }
-    var group: String = ""
-    var media: Media = Media.EMPTY
+}
 
-    constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY, group: String = "", media: Media = Media.EMPTY): super(start, end, text) {
+
+open class TimeEvent: Era {
+    var group: String
+    var media: Media
+
+
+    constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY, group: String = "", media: Media = Media.EMPTY) {
+        this.start = start
+        this.end = end
+        this.text = text
         this.group = group
         this.media = media
     }
 
-
-
+    companion object {
+        val EMPTY = TimeEvent()
+    }
 }
 
-fun TimeEvent?.orEmpty(): TimeEvent {
-    return if (this != null) this else TimeEvent.EMPTY
+
+open class Text {
+    var title: String
+    var text: String
+
+
+    constructor(title: String = "", text: String = "") {
+        this.title = title
+        this.text = text
+    }
+
+    companion object {
+        val EMPTY = Text()
+    }
 }
+
+
+open class Media {
+    var url: URL
+    var caption: String
+    var credit: String
+    var thumbnail: String
+
+
+    constructor(url: URL = URL(""), caption: String = "", credit: String = "", thumbnail: String = "") {
+        this.url = url
+        this.caption = caption
+        this.credit = credit
+        this.thumbnail = thumbnail
+    }
+
+    companion object {
+        val EMPTY = Media()
+    }
+}
+
 
 

@@ -3,7 +3,7 @@ package ee.timeline
 import ee.design.*
 import ee.lang.*
 
-object Timeline : Comp({ namespace("ee.timeline") }) {
+object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
     object shared : Module() {
 
         object TimeEvents : Entity() {
@@ -24,7 +24,7 @@ object Timeline : Comp({ namespace("ee.timeline") }) {
         }
 
         object Media : Basic() {
-            val url = prop()
+            val url = prop(n.Url)
             val caption = prop()
             val credit = prop()
             val thumbnail = prop()
@@ -37,11 +37,35 @@ object Timeline : Comp({ namespace("ee.timeline") }) {
     }
 
     object person : Module() {
-        object Author : Entity() {
+        object Linked : Basic() {
+            val info = prop()
+            val link = prop(n.Url)
+        }
+
+        object LinkedName : Basic({ superUnit(Linked) }) {
+            val name = prop()
+        }
+
+        object PersonName : Basic({ superUnit(Linked) }) {
             val firstName = prop()
             val lastName = prop()
-            val birthsDate = prop(n.Date)
-            val deathsDate = prop(n.Date)
+        }
+
+        object Place : Basic({ superUnit(Linked) }) {
+            val name = prop()
+        }
+
+        object TimePoint : Basic() {
+            val date = prop(n.Date)
+            val place = prop(Place)
+        }
+
+        object Author : Entity() {
+            val name = prop(PersonName)
+            val birth = prop(TimePoint)
+            val death = prop(TimePoint)
+            val group = prop(LinkedName)
+            val subGroup = prop(LinkedName)
             val quotes = prop(n.List.GT())
         }
     }

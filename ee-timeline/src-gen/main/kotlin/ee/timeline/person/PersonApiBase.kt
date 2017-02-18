@@ -4,18 +4,20 @@ import java.net.URL
 import java.util.Date
 
 
+
+
 open class Author {
     val name: PersonName
     val birth: TimePoint
     val death: TimePoint
     val group: LinkedName
     val subGroup: LinkedName
-    val quotes: MutableList<String>
+    val quotes: MutableList<Era>
 
 
-    constructor(name: PersonName = PersonName.EMPTY, birth: TimePoint = TimePoint.EMPTY, death: TimePoint = TimePoint.EMPTY,
-                group: LinkedName = LinkedName.EMPTY, subGroup: LinkedName = LinkedName.EMPTY,
-                quotes: MutableList<String> = arrayListOf()) {
+    constructor(name: PersonName = PersonName.EMPTY, birth: TimePoint = TimePoint.EMPTY, death: TimePoint = TimePoint.EMPTY, 
+                group: LinkedName = LinkedName.EMPTY, subGroup: LinkedName = LinkedName.EMPTY, 
+                quotes: MutableList<Era> = arrayListOf()) {
         this.name = name
         this.birth = birth
         this.death = death

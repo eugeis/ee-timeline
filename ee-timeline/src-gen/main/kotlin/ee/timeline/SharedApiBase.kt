@@ -7,12 +7,13 @@ import java.util.Date
 
 
 open class TimeEvents {
-    var title: TimeEvent
-    var events: MutableList<Era>
-    var eras: MutableList<Era>
+    val title: TimeEvent
+    val events: MutableList<TimeEvent>
+    val eras: MutableList<Era>
 
 
-    constructor(title: TimeEvent = TimeEvent.EMPTY, events: MutableList<Era> = arrayListOf(), eras: MutableList<Era> = arrayListOf()) {
+    constructor(title: TimeEvent = TimeEvent.EMPTY, events: MutableList<TimeEvent> = arrayListOf(), 
+                eras: MutableList<Era> = arrayListOf()) {
         this.title = title
         this.events = events
         this.eras = eras
@@ -25,9 +26,9 @@ open class TimeEvents {
 
 
 open class Era {
-    var start: Date
-    var end: Date
-    var text: Text
+    val start: Date
+    val end: Date
+    val text: Text
 
 
     constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY) {
@@ -42,15 +43,12 @@ open class Era {
 }
 
 
-open class TimeEvent: Era {
-    var group: String
-    var media: Media
+open class TimeEvent : Era {
+    val group: String
+    val media: Media
 
 
-    constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY, group: String = "", media: Media = Media.EMPTY) {
-        this.start = start
-        this.end = end
-        this.text = text
+    constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY, group: String = "", media: Media = Media.EMPTY) : super(start, end, text) {
         this.group = group
         this.media = media
     }
@@ -62,8 +60,8 @@ open class TimeEvent: Era {
 
 
 open class Text {
-    var title: String
-    var text: String
+    val title: String
+    val text: String
 
 
     constructor(title: String = "", text: String = "") {
@@ -78,10 +76,10 @@ open class Text {
 
 
 open class Media {
-    var url: URL
-    var caption: String
-    var credit: String
-    var thumbnail: String
+    val url: URL
+    val caption: String
+    val credit: String
+    val thumbnail: String
 
 
     constructor(url: URL = URL(""), caption: String = "", credit: String = "", thumbnail: String = "") {

@@ -4,26 +4,23 @@ import java.net.URL
 import java.util.Date
 
 
-
-
 open class Author {
-    var name: PersonName
-    var birth: TimePoint
-    var death: TimePoint
-    var group: LinkedName
-    var subGroup: LinkedName
-    var quotes: MutableList<Era>
+    val name: PersonName
+    val birth: TimePoint
+    val death: TimePoint
+    val group: LinkedName
+    val subGroup: LinkedName
+    val quotes: MutableList<String>
 
 
-    constructor(name: PersonName = PersonName.EMPTY, birth: TimePoint = TimePoint.EMPTY, death: TimePoint = TimePoint.EMPTY, 
-                group: LinkedName = LinkedName.EMPTY, subGroup: LinkedName = LinkedName.EMPTY, 
-                quotes: MutableList<Era> = arrayListOf()) {
+    constructor(name: PersonName = PersonName.EMPTY, birth: TimePoint = TimePoint.EMPTY, death: TimePoint = TimePoint.EMPTY,
+                group: LinkedName = LinkedName.EMPTY, subGroup: LinkedName = LinkedName.EMPTY,
+                quotes: MutableList<String> = arrayListOf()) {
         this.name = name
         this.birth = birth
         this.death = death
         this.group = group
-        
-this.subGroup = subGroup
+        this.subGroup = subGroup
         this.quotes = quotes
     }
 
@@ -34,12 +31,10 @@ this.subGroup = subGroup
 
 
 open class Linked {
-    var info: String
-    var link: URL
+    val link: URL
 
 
-    constructor(info: String = "", link: URL = URL("")) {
-        this.info = info
+    constructor(link: URL = URL("")) {
         this.link = link
     }
 
@@ -49,13 +44,11 @@ open class Linked {
 }
 
 
-open class LinkedName: Linked {
-    var name: String
+open class LinkedName : Linked {
+    val name: String
 
 
-    constructor(info: String = "", link: URL = URL(""), name: String = "") {
-        this.info = info
-        this.link = link
+    constructor(link: URL = URL(""), name: String = "") : super(link) {
         this.name = name
     }
 
@@ -65,14 +58,12 @@ open class LinkedName: Linked {
 }
 
 
-open class PersonName: Linked {
-    var firstName: String
-    var lastName: String
+open class PersonName : Linked {
+    val firstName: String
+    val lastName: String
 
 
-    constructor(info: String = "", link: URL = URL(""), firstName: String = "", lastName: String = "") {
-        this.info = info
-        this.link = link
+    constructor(link: URL = URL(""), firstName: String = "", lastName: String = "") : super(link) {
         this.firstName = firstName
         this.lastName = lastName
     }
@@ -83,13 +74,11 @@ open class PersonName: Linked {
 }
 
 
-open class Place: Linked {
-    var name: String
+open class Place : Linked {
+    val name: String
 
 
-    constructor(info: String = "", link: URL = URL(""), name: String = "") {
-        this.info = info
-        this.link = link
+    constructor(link: URL = URL(""), name: String = "") : super(link) {
         this.name = name
     }
 
@@ -100,8 +89,8 @@ open class Place: Linked {
 
 
 open class TimePoint {
-    var date: Date
-    var place: Place
+    val date: Date
+    val place: Place
 
 
     constructor(date: Date = Date(), place: Place = Place.EMPTY) {

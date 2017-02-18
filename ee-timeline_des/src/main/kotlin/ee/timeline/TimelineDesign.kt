@@ -38,7 +38,6 @@ object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
 
     object person : Module() {
         object Linked : Basic() {
-            val info = prop()
             val link = prop(n.Url)
         }
 

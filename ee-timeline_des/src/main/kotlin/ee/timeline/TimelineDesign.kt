@@ -38,7 +38,10 @@ object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
 
     object person : Module() {
         object Linked : Basic() {
-            val link = prop(n.Url)
+            val link = prop {
+                type(n.Url)
+                value("""URL("http://")""")
+            }
         }
 
         object LinkedName : Basic({ superUnit(Linked) }) {
@@ -64,8 +67,12 @@ object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
             val birth = prop(TimePoint)
             val death = prop(TimePoint)
             val group = prop(LinkedName)
-            val subGroup = prop(LinkedName)
-            val quotes = prop(n.List.GT())
+            val quotes = prop(n.List.GT(n.String))
+        }
+
+        object Group : Entity() {
+            val group = prop(LinkedName)
+            val authors = prop(n.List.GT(Author))
         }
     }
 }

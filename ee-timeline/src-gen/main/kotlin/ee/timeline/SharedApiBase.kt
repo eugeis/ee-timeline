@@ -78,11 +78,12 @@ open class TimeEvent : Era {
 
 open class TimeEvents {
     val title: TimeEvent
-    val events: MutableList<Era>
+    val events: MutableList<TimeEvent>
     val eras: MutableList<Era>
 
 
-    constructor(title: TimeEvent = TimeEvent.EMPTY, events: MutableList<Era> = arrayListOf(), eras: MutableList<Era> = arrayListOf()) {
+    constructor(title: TimeEvent = TimeEvent.EMPTY, events: MutableList<TimeEvent> = arrayListOf(), 
+                eras: MutableList<Era> = arrayListOf()) {
         this.title = title
         this.events = events
         this.eras = eras

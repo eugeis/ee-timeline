@@ -10,37 +10,19 @@ open class Author {
     val name: PersonName
     val birth: TimePoint
     val death: TimePoint
-    val group: LinkedName
     val quotes: MutableList<String>
 
 
     constructor(name: PersonName = PersonName.EMPTY, birth: TimePoint = TimePoint.EMPTY, death: TimePoint = TimePoint.EMPTY, 
-                group: LinkedName = LinkedName.EMPTY, quotes: MutableList<String> = arrayListOf()) {
+                quotes: MutableList<String> = arrayListOf()) {
         this.name = name
         this.birth = birth
         this.death = death
-        this.group = group
         this.quotes = quotes
     }
 
     companion object {
         val EMPTY = Author()
-    }
-}
-
-
-open class Group {
-    val group: LinkedName
-    val authors: MutableList<Author>
-
-
-    constructor(group: LinkedName = LinkedName.EMPTY, authors: MutableList<Author> = arrayListOf()) {
-        this.group = group
-        this.authors = authors
-    }
-
-    companion object {
-        val EMPTY = Group()
     }
 }
 
@@ -85,6 +67,31 @@ open class PersonName : Linked {
 
     companion object {
         val EMPTY = PersonName()
+    }
+}
+
+
+open class Phase {
+    val name: LinkedName
+    val from: Date
+    val to: Date
+    val range: String
+    val authors: MutableList<Author>
+    val phases: MutableList<Phase>
+
+
+    constructor(name: LinkedName = LinkedName.EMPTY, from: Date = Date(), to: Date = Date(), range: String = "", 
+                authors: MutableList<Author> = arrayListOf(), phases: MutableList<Phase> = arrayListOf()) {
+        this.name = name
+        this.from = from
+        this.to = to
+        this.range = range
+        this.authors = authors
+        this.phases = phases
+    }
+
+    companion object {
+        val EMPTY = Phase()
     }
 }
 

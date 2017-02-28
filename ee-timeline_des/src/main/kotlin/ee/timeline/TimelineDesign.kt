@@ -19,12 +19,12 @@ object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
         }
 
         object Text : Basic() {
-            val title = prop()
+            val headline = prop()
             val text = prop()
         }
 
         object Media : Basic() {
-            val url = prop(n.Url)
+            val url = prop { type(n.Url).value("""URL("http://")""") }
             val caption = prop()
             val credit = prop()
             val thumbnail = prop()
@@ -33,15 +33,13 @@ object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
         object TimeEvent : Entity({ superUnit(Era) }) {
             val group = prop()
             val media = prop(Media)
+            val range = prop(n.String)
         }
     }
 
     object person : Module() {
         object Linked : Basic() {
-            val link = prop {
-                type(n.Url)
-                value("""URL("http://")""")
-            }
+            val link = prop { type(n.Url).value("""URL("http://")""") }
         }
 
         object LinkedName : Basic({ superUnit(Linked) }) {
@@ -62,17 +60,20 @@ object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
             val place = prop(Place)
         }
 
+        object Phase : Entity() {
+            val name = prop(LinkedName)
+            val from = prop(n.Date)
+            val to = prop(n.Date)
+            val range = prop(n.String)
+            val authors = prop(n.List.GT(Author))
+            val phases = prop(n.List.GT(Phase))
+        }
+
         object Author : Entity() {
             val name = prop(PersonName)
             val birth = prop(TimePoint)
             val death = prop(TimePoint)
-            val group = prop(LinkedName)
             val quotes = prop(n.List.GT(n.String))
-        }
-
-        object Group : Entity() {
-            val group = prop(LinkedName)
-            val authors = prop(n.List.GT(Author))
         }
     }
 }

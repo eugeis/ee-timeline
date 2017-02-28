@@ -31,7 +31,7 @@ open class Media {
     val thumbnail: String
 
 
-    constructor(url: URL = URL(""), caption: String = "", credit: String = "", thumbnail: String = "") {
+    constructor(url: URL = URL("http://"), caption: String = "", credit: String = "", thumbnail: String = "") {
         this.url = url
         this.caption = caption
         this.credit = credit
@@ -45,12 +45,12 @@ open class Media {
 
 
 open class Text {
-    val title: String
+    val headline: String
     val text: String
 
 
-    constructor(title: String = "", text: String = "") {
-        this.title = title
+    constructor(headline: String = "", text: String = "") {
+        this.headline = headline
         this.text = text
     }
 
@@ -63,11 +63,14 @@ open class Text {
 open class TimeEvent : Era {
     val group: String
     val media: Media
+    val range: String
 
 
-    constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY, group: String = "", media: Media = Media.EMPTY) : super(start, end, text) {
+    constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY, group: String = "", media: Media = Media.EMPTY, 
+                range: String = "") : super(start, end, text) {
         this.group = group
         this.media = media
+        this.range = range
     }
 
     companion object {

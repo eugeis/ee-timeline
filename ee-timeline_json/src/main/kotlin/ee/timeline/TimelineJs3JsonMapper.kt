@@ -27,7 +27,8 @@ class ExpandDateSerializer : StdSerializer<Date>(Date::class.java) {
 
     override fun serialize(value: Date?, gen: JsonGenerator, provider: SerializerProvider) {
         if (value != null) {
-            gen.writeRawValue("""{ "year": "${y.format(value)}", "month": "${m.format(value)}", "day": "${d.format(value)}" }""")
+            //gen.writeRawValue("""{ "year": "${y.format(value)}", "month": "${m.format(value)}", "day": "${d.format(value)}" }""")
+            gen.writeRawValue("""{ "year": "${y.format(value)}" }""")
         }
     }
 }

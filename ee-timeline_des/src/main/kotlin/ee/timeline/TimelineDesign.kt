@@ -1,7 +1,12 @@
 package ee.timeline
 
-import ee.design.*
-import ee.lang.*
+import ee.design.Basic
+import ee.design.Comp
+import ee.design.Entity
+import ee.design.Module
+import ee.lang.GT
+import ee.lang.n
+import ee.lang.prop
 
 object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
     object shared : Module() {
@@ -24,22 +29,28 @@ object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
         }
 
         object Media : Basic() {
-            val url = prop { type(n.Url).value("""URL("http://")""") }
+            val url = prop { type(n.String) }
             val caption = prop()
             val credit = prop()
             val thumbnail = prop()
+        }
+
+        object Background : Basic() {
+            val url = prop { type(n.String).nullable(true) }
+            val color = prop()
         }
 
         object TimeEvent : Entity({ superUnit(Era) }) {
             val group = prop()
             val media = prop(Media)
             val range = prop(n.String)
+            val background = prop(Background)
         }
     }
 
     object person : Module() {
         object Linked : Basic() {
-            val link = prop { type(n.Url).value("""URL("http://")""") }
+            val link = prop { type(n.String) }
         }
 
         object LinkedName : Basic({ superUnit(Linked) }) {
@@ -60,20 +71,26 @@ object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
             val place = prop(Place)
         }
 
+        object Period : Basic() {
+            val caption = prop(n.String)
+            val start = prop(n.Int)
+            val end = prop(n.Int)
+        }
+
         object Phase : Entity() {
             val name = prop(LinkedName)
-            val from = prop(n.Date)
-            val to = prop(n.Date)
-            val range = prop(n.String)
+            val period = prop(Period)
             val authors = prop(n.List.GT(Author))
             val phases = prop(n.List.GT(Phase))
         }
 
         object Author : Entity() {
             val name = prop(PersonName)
+            val fotoLink = prop()
             val birth = prop(TimePoint)
             val death = prop(TimePoint)
             val quotes = prop(n.List.GT(n.String))
+            val workPeriod = prop(Period)
         }
     }
 }

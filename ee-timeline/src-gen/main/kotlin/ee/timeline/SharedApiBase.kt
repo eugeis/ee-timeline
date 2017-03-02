@@ -1,9 +1,24 @@
 package ee.timeline
 
-import java.net.URL
 import java.util.Date
 
 
+
+
+open class Background {
+    val url: String?
+    val color: String
+
+
+    constructor(url: String? = null, color: String = "") {
+        this.url = url
+        this.color = color
+    }
+
+    companion object {
+        val EMPTY = Background()
+    }
+}
 
 
 open class Era {
@@ -25,13 +40,13 @@ open class Era {
 
 
 open class Media {
-    val url: URL
+    val url: String
     val caption: String
     val credit: String
     val thumbnail: String
 
 
-    constructor(url: URL = URL("http://"), caption: String = "", credit: String = "", thumbnail: String = "") {
+    constructor(url: String = "", caption: String = "", credit: String = "", thumbnail: String = "") {
         this.url = url
         this.caption = caption
         this.credit = credit
@@ -64,13 +79,15 @@ open class TimeEvent : Era {
     val group: String
     val media: Media
     val range: String
+    val background: Background
 
 
     constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY, group: String = "", media: Media = Media.EMPTY, 
-                range: String = "") : super(start, end, text) {
+                range: String = "", background: Background = Background.EMPTY) : super(start, end, text) {
         this.group = group
         this.media = media
         this.range = range
+        this.background = background
     }
 
     companion object {

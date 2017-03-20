@@ -48,7 +48,7 @@ class TimelineJs3JsonMapper : ObjectMapper() {
 }
 
 class PropertyNamingStrategy2 : PropertyNamingStrategy() {
-    val nameToChange = hashMapOf("start" to "start_date", "end" to "end_date", "range" to "display_date")
+    val nameToChange = hashMapOf("start" to "start_date", "end" to "end_date", "range" to "display_date", "id" to "unique_id")
     override fun nameForGetterMethod(config: MapperConfig<*>, method: AnnotatedMethod, defaultName: String): String {
         return nameToChange[defaultName] ?: super.nameForGetterMethod(config, method, defaultName)
     }
@@ -56,4 +56,15 @@ class PropertyNamingStrategy2 : PropertyNamingStrategy() {
 
 fun TimeEvents.toTimelineJs3(path: Path, name: String = "TimetableJS3.json") {
     mapper.writeValue(path.resolve(name).toFile(), this)
+}
+
+fun TimeEvents.toTimelineJs3ColorCss(path: Path, name: String = "TimetableJS3Color.css") {
+    path.resolve(name).toFile().printWriter().use { out ->
+        this.events.forEach { event ->
+            out.println("""
+#${event.id}-marker > .tl-timemarker-content-container {
+    background-color: ${event.markerBackground.color};
+}""")
+        }
+    }
 }

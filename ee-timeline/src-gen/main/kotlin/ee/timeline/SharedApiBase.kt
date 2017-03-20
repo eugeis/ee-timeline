@@ -76,17 +76,22 @@ open class Text {
 
 
 open class TimeEvent : Era {
+    val id: String
     val group: String
     val media: Media
     val range: String
+    val markerBackground: Background
     val background: Background
 
 
-    constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY, group: String = "", media: Media = Media.EMPTY, 
-                range: String = "", background: Background = Background.EMPTY) : super(start, end, text) {
+    constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY, id: String = "", group: String = "", 
+                media: Media = Media.EMPTY, range: String = "", markerBackground: Background = Background.EMPTY, 
+                background: Background = Background.EMPTY) : super(start, end, text) {
+        this.id = id
         this.group = group
         this.media = media
         this.range = range
+        this.markerBackground = markerBackground
         this.background = background
     }
 

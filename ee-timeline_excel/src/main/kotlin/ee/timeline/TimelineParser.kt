@@ -3,11 +3,15 @@ package ee.excel
 import ee.common.ext.addReturn
 import ee.timeline.person.*
 import ee.timeline.toTimelineJs3
+import ee.timeline.toTimelineJs3ColorCss
+import org.apache.poi.sl.draw.binding.CTColor
+import org.apache.poi.xssf.usermodel.XSSFColor
 import java.nio.file.Paths
 import java.util.*
 
 data class Link(val abbr: String = "", val name: String = "", val link: String = "",
-                val fromYear: Int = -1, val toYear: Int = -1, val pointYear: Int = -1)
+                val fromYear: Int = -1, val toYear: Int = -1, val desc: String = "",
+                val color: String = "")
 
 class TimelineParser() {
 
@@ -24,14 +28,15 @@ class TimelineParser() {
         for (i in 1..phasen.count() - 1) {
             val row = phasen[i]
             if (row[0].trim().isNotEmpty()) {
-                val link = Link(row[0].trim(), row[1].trim(), row[2].trim(), row[3].toInt(), row[4].toInt(), row[5].toInt())
+                val link = Link(row[0].trim(), row[1].trim(), row[2].trim(), row[3].toInt(), row[4].toInt(),
+                        row[6].trim(), row[7].trim())
                 abbrToLink[link.abbr] = link
             }
         }
 
         val subPhases = HashMap<String, Phase>()
 
-        val theo = excel.getSheet("Theologen")
+        val theo = excel.getSheet("Vertreter")
         for (i in 1..theo.count() - 1) {
             val row = theo[i]
             val cell = row[0].trim()
@@ -47,8 +52,8 @@ class TimelineParser() {
                 val phase = subPhases.getOrPut(phaseLink.name, {
                     group.phases.addReturn(
                             Phase(LinkedName(name = phaseLink.name, link = phaseLink.link),
-                                    period = Period(start = phaseLink.fromYear, end = phaseLink.toYear,
-                                            caption = phaseLink.pointYear.toString())))
+                                    period = Period(start = phaseLink.fromYear, end = phaseLink.toYear),
+                                    description = phaseLink.desc, color = phaseLink.color))
                 })
 
                 if (row[7].trim().isNotBlank()) {
@@ -71,13 +76,15 @@ class TimelineParser() {
         }
 
         excel.close()
-        return Phase(name = LinkedName(name = "Zeittafel der Christlichen Theologie"), phases = ret.values.toMutableList())
+        return Phase(name = LinkedName(name = "Zeittafel der Christlichen Theologie"),
+                phases = ret.values.toMutableList()).sortByDates()
     }
 }
 
 fun main(args: Array<String>) {
-    val phase = TimelineParser().load("/Users/ee/cloud/fecg_bs/ee/bibelschule/GM1/Zeitstahl.xlsx")
+    val phase = TimelineParser().load("/Users/ee/cloud/fecg_bs/ee/bibelschule/GM1/Zeitstrahl.xlsx")
     val timeEvents = phase.toTimeEvents()
     timeEvents.toTimelineJs3(Paths.get("/Users/ee/git/ee-bible/tl"), "theoline.json")
+    timeEvents.toTimelineJs3ColorCss(Paths.get("/Users/ee/git/ee-bible/tl"), "theoline.css")
 }
 

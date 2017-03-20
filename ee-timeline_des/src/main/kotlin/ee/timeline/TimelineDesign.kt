@@ -41,9 +41,11 @@ object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
         }
 
         object TimeEvent : Entity({ superUnit(Era) }) {
+            val id = prop()
             val group = prop()
             val media = prop(Media)
             val range = prop(n.String)
+            val markerBackground = prop(Background)
             val background = prop(Background)
         }
     }
@@ -79,7 +81,9 @@ object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
 
         object Phase : Entity() {
             val name = prop(LinkedName)
+            val description = prop()
             val period = prop(Period)
+            var color = prop()
             val authors = prop(n.List.GT(Author))
             val phases = prop(n.List.GT(Phase))
         }

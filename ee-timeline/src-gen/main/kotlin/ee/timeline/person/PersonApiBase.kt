@@ -95,15 +95,19 @@ open class PersonName : Linked {
 
 open class Phase {
     val name: LinkedName
+    val description: String
     val period: Period
+    val color: String
     val authors: MutableList<Author>
     val phases: MutableList<Phase>
 
 
-    constructor(name: LinkedName = LinkedName.EMPTY, period: Period = Period.EMPTY, authors: MutableList<Author> = arrayListOf(), 
-                phases: MutableList<Phase> = arrayListOf()) {
+    constructor(name: LinkedName = LinkedName.EMPTY, description: String = "", period: Period = Period.EMPTY, color: String = "", 
+                authors: MutableList<Author> = arrayListOf(), phases: MutableList<Phase> = arrayListOf()) {
         this.name = name
+        this.description = description
         this.period = period
+        this.color = color
         this.authors = authors
         this.phases = phases
     }

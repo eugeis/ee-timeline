@@ -1,9 +1,24 @@
 package ee.timeline
 
-import java.net.URL
 import java.util.Date
 
 
+
+
+open class Background {
+    val url: String?
+    val color: String
+
+
+    constructor(url: String? = null, color: String = "") {
+        this.url = url
+        this.color = color
+    }
+
+    companion object {
+        val EMPTY = Background()
+    }
+}
 
 
 open class Era {
@@ -25,13 +40,13 @@ open class Era {
 
 
 open class Media {
-    val url: URL
+    val url: String
     val caption: String
     val credit: String
     val thumbnail: String
 
 
-    constructor(url: URL = URL(""), caption: String = "", credit: String = "", thumbnail: String = "") {
+    constructor(url: String = "", caption: String = "", credit: String = "", thumbnail: String = "") {
         this.url = url
         this.caption = caption
         this.credit = credit
@@ -45,12 +60,12 @@ open class Media {
 
 
 open class Text {
-    val title: String
+    val headline: String
     val text: String
 
 
-    constructor(title: String = "", text: String = "") {
-        this.title = title
+    constructor(headline: String = "", text: String = "") {
+        this.headline = headline
         this.text = text
     }
 
@@ -61,13 +76,23 @@ open class Text {
 
 
 open class TimeEvent : Era {
+    val id: String
     val group: String
     val media: Media
+    val range: String
+    val markerBackground: Background
+    val background: Background
 
 
-    constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY, group: String = "", media: Media = Media.EMPTY) : super(start, end, text) {
+    constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY, id: String = "", group: String = "", 
+                media: Media = Media.EMPTY, range: String = "", markerBackground: Background = Background.EMPTY, 
+                background: Background = Background.EMPTY) : super(start, end, text) {
+        this.id = id
         this.group = group
         this.media = media
+        this.range = range
+        this.markerBackground = markerBackground
+        this.background = background
     }
 
     companion object {
@@ -78,11 +103,12 @@ open class TimeEvent : Era {
 
 open class TimeEvents {
     val title: TimeEvent
-    val events: MutableList<Era>
+    val events: MutableList<TimeEvent>
     val eras: MutableList<Era>
 
 
-    constructor(title: TimeEvent = TimeEvent.EMPTY, events: MutableList<Era> = arrayListOf(), eras: MutableList<Era> = arrayListOf()) {
+    constructor(title: TimeEvent = TimeEvent.EMPTY, events: MutableList<TimeEvent> = arrayListOf(), 
+                eras: MutableList<Era> = arrayListOf()) {
         this.title = title
         this.events = events
         this.eras = eras

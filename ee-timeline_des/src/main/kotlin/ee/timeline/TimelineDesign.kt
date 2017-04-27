@@ -95,6 +95,33 @@ object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
             val death = prop(TimePoint)
             val quotes = prop(n.List.GT(n.String))
             val workPeriod = prop(Period)
+            val description = prop()
         }
+    }
+
+    object bible : Module() {
+//'{ "name": "Evangelium nach Matthäus",  "abbr":"Mt",  "chapters":28, "verses":1071, "year": 57, "yearTo": 59,
+// "keyword": "Königreich", "mainIdea": "Jesus: König u. Messias", "keyVerse": "1:1",
+// "author": "Matthäus", "testament": "NT", "group": "gospel" },' +
+
+        object Book : Entity() {
+            val name = prop()
+            val abbr = prop()
+            val testament = prop()
+            val group = prop()
+
+            val chapters = prop(n.Int)
+            val verses = prop(n.Int)
+
+            val year = prop(n.Int)
+            val yearTo = prop(n.Int)
+
+            val keywords = prop(n.List.GT(n.String))
+            val mainIdeas = prop(n.List.GT(n.String))
+            val keyVerses = prop(n.List.GT(n.String))
+
+            val author = prop(person.Author)
+        }
+
     }
 }

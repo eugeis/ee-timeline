@@ -1,5 +1,5 @@
 package ee.timeline
-import ee.design.gen.DesignKotlinGenerator
+import ee.design.gen.kt.DesignKotlinGenerator
 import ee.lang.integ.dPath
 import ee.lang.integ.eePath
 

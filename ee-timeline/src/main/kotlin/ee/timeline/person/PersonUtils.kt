@@ -9,12 +9,12 @@ import java.util.*
 
 private val cal = Calendar.getInstance()
 fun Int.toYearStartDate(): Date {
-    cal.set(this, 1, 1)
+    cal.set(this, 0, 1)
     return cal.time
 }
 
 fun Int.toYearEndDate(): Date {
-    cal.set(this, 12, 31)
+    cal.set(this, 11, 31)
     return cal.time
 }
 

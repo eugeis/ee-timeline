@@ -7,6 +7,7 @@ import ee.design.Module
 import ee.lang.GT
 import ee.lang.n
 import ee.lang.prop
+import ee.lang.superUnit
 
 object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
     object shared : Module() {

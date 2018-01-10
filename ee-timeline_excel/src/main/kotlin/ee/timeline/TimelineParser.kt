@@ -18,7 +18,7 @@ class TimelineParser() {
     fun load(file: String): Phase {
 
         val ret = HashMap<String, Phase>()
-        val excel = Excel.open(file)
+        val excel = Excel.open(Paths.get(file))
 
         val linkEmpty = Link()
 

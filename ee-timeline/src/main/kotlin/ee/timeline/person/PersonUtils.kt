@@ -58,9 +58,9 @@ fun Phase.sortByDates(): Phase {
 fun Phase.fillTimeEvents(timeEvents: TimeEvents, parent: Phase? = null): TimeEvents {
     val group = parent?.name?.name ?: ""
     val groupAuthors = when (group) {
-        "Liberale" -> "Spekulationstheologen"
+        "Liberale"   -> "Spekulationstheologen"
         "bibeltreue" -> "Offenbarungstheologen"
-        else -> {
+        else         -> {
             "$group Vertreter"
         }
     }
@@ -74,17 +74,14 @@ fun Phase.fillTimeEvents(timeEvents: TimeEvents, parent: Phase? = null): TimeEve
             """<q class="q">${author.quotes.first()}</q>"""
         }
 
-        timeEvents.events.add(
-                TimeEvent(id = fullName.toUrlKey(), start = author.birth.date, end = author.death.date,
-                        group = groupAuthors, markerBackground = background(color), media = Media(author.name.link),
-                        text = Text(headline = author.name.link.isNotBlank().ifElse(
-                                { """<a href="${author.name.link}" target="_blank">$fullName</a>""" },
-                                { "${author.name.firstName} ${author.name.lastName}" }),
-                                text = """
+        timeEvents.events.add(TimeEvent(id = fullName.toUrlKey(), start = author.birth.date, end = author.death.date,
+            group = groupAuthors, markerBackground = background(color), media = Media(author.name.link), text = Text(
+                headline = author.name.link.isNotBlank().ifElse(
+                    { """<a href="${author.name.link}" target="_blank">$fullName</a>""" },
+                    { "${author.name.firstName} ${author.name.lastName}" }), text = """
     <div class="ph">
         <a href="#event-${name.name.toUrlKey()}" onclick="timeline.goToId('${name.name.toUrlKey()}');">${name.name}</a>
-    </div>$photo$quotes"""))
-        )
+    </div>$photo$quotes""")))
     }
 
     phases.forEach { phase ->
@@ -96,17 +93,16 @@ fun Phase.fillTimeEvents(timeEvents: TimeEvents, parent: Phase? = null): TimeEve
             """<a href="#event-${fullName.toUrlKey()}" onclick="timeline.goToId('${fullName.toUrlKey()}');">$fullName</a>"""
         }.joinSurroundIfNotEmptyToString(prefix = """<br><p>Vertreter:</p><ul class="author">""", postfix = "</ul>",
                 separator = "\n    ") { "<li>$it</li>" }
-        val description = phase.description.split('\n').joinToString(prefix = "<p>Charakteristika:</p>\n<ul>",
-                postfix = "</ul>", separator = "\n    ") { "<li>$it</li>" }
-        timeEvents.events.add(
-                TimeEvent(id = phase.name.name.toUrlKey(),
-                        start = phase.period.start.toYearStartDate(), end = phase.period.end.toYearEndDate(),
-                        group = groupSchulen, markerBackground = background(phase.color),
-                        text = Text(headline = phase.name.link.isNotBlank().ifElse(
-                                { """<a href="${phase.name.link}" target="_blank">${phase.name.name}</a>""" },
-                                { "${phase.name.name}" }), text = "$description$authors"),
-                        media = phase.name.link.startsWith("https://de.wikipedia.").ifElse(
-                                { Media(phase.name.link) }, { Media.EMPTY })))
+        val description = phase.description.split('\n')
+            .joinToString(prefix = "<p>Charakteristika:</p>\n<ul>", postfix = "</ul>",
+                separator = "\n    ") { "<li>$it</li>" }
+        timeEvents.events.add(TimeEvent(id = phase.name.name.toUrlKey(), start = phase.period.start.toYearStartDate(),
+            end = phase.period.end.toYearEndDate(), group = groupSchulen, markerBackground = background(phase.color),
+            text = Text(headline = phase.name.link.isNotBlank().ifElse(
+                { """<a href="${phase.name.link}" target="_blank">${phase.name.name}</a>""" },
+                { "${phase.name.name}" }), text = "$description$authors"),
+            media = phase.name.link.startsWith("https://de.wikipedia.").ifElse({ Media(phase.name.link) },
+                { Media.EMPTY })))
         phase.fillTimeEvents(timeEvents, this)
     }
     return timeEvents

@@ -1,8 +1,6 @@
 package ee.timeline
 
-import java.util.Date
-
-
+import java.util.*
 
 
 open class Background {
@@ -84,9 +82,9 @@ open class TimeEvent : Era {
     val background: Background
 
 
-    constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY, id: String = "", group: String = "", 
-                media: Media = Media.EMPTY, range: String = "", markerBackground: Background = Background.EMPTY, 
-                background: Background = Background.EMPTY) : super(start, end, text) {
+    constructor(start: Date = Date(), end: Date = Date(), text: Text = Text.EMPTY, id: String = "", group: String = "",
+        media: Media = Media.EMPTY, range: String = "", markerBackground: Background = Background.EMPTY,
+        background: Background = Background.EMPTY) : super(start, end, text) {
         this.id = id
         this.group = group
         this.media = media
@@ -107,8 +105,8 @@ open class TimeEvents {
     val eras: MutableList<Era>
 
 
-    constructor(title: TimeEvent = TimeEvent.EMPTY, events: MutableList<TimeEvent> = arrayListOf(), 
-                eras: MutableList<Era> = arrayListOf()) {
+    constructor(title: TimeEvent = TimeEvent.EMPTY, events: MutableList<TimeEvent> = arrayListOf(),
+        eras: MutableList<Era> = arrayListOf()) {
         this.title = title
         this.events = events
         this.eras = eras

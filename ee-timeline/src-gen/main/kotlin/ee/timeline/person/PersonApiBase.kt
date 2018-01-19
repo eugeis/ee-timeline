@@ -1,8 +1,6 @@
 package ee.timeline.person
 
-import java.util.Date
-
-
+import java.util.*
 
 
 open class Author {
@@ -14,9 +12,9 @@ open class Author {
     val workPeriod: Period
 
 
-    constructor(name: PersonName = PersonName.EMPTY, fotoLink: String = "", birth: TimePoint = TimePoint.EMPTY, 
-                death: TimePoint = TimePoint.EMPTY, quotes: MutableList<String> = arrayListOf(), 
-                workPeriod: Period = Period.EMPTY) {
+    constructor(name: PersonName = PersonName.EMPTY, fotoLink: String = "", birth: TimePoint = TimePoint.EMPTY,
+        death: TimePoint = TimePoint.EMPTY, quotes: MutableList<String> = arrayListOf(),
+        workPeriod: Period = Period.EMPTY) {
         this.name = name
         this.fotoLink = fotoLink
         this.birth = birth
@@ -102,8 +100,8 @@ open class Phase {
     val phases: MutableList<Phase>
 
 
-    constructor(name: LinkedName = LinkedName.EMPTY, description: String = "", period: Period = Period.EMPTY, color: String = "", 
-                authors: MutableList<Author> = arrayListOf(), phases: MutableList<Phase> = arrayListOf()) {
+    constructor(name: LinkedName = LinkedName.EMPTY, description: String = "", period: Period = Period.EMPTY,
+        color: String = "", authors: MutableList<Author> = arrayListOf(), phases: MutableList<Phase> = arrayListOf()) {
         this.name = name
         this.description = description
         this.period = period

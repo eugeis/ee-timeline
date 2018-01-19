@@ -48,7 +48,9 @@ class TimelineJs3JsonMapper : ObjectMapper() {
 }
 
 class PropertyNamingStrategy2 : PropertyNamingStrategy() {
-    val nameToChange = hashMapOf("start" to "start_date", "end" to "end_date", "range" to "display_date", "id" to "unique_id")
+    val nameToChange =
+        hashMapOf("start" to "start_date", "end" to "end_date", "range" to "display_date", "id" to "unique_id")
+
     override fun nameForGetterMethod(config: MapperConfig<*>, method: AnnotatedMethod, defaultName: String): String {
         return nameToChange[defaultName] ?: super.nameForGetterMethod(config, method, defaultName)
     }

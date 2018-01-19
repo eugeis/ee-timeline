@@ -101,9 +101,9 @@ object Timeline : Comp({ artifact("ee-timeline").namespace("ee.timeline") }) {
     }
 
     object bible : Module() {
-//'{ "name": "Evangelium nach Matthäus",  "abbr":"Mt",  "chapters":28, "verses":1071, "year": 57, "yearTo": 59,
-// "keyword": "Königreich", "mainIdea": "Jesus: König u. Messias", "keyVerse": "1:1",
-// "author": "Matthäus", "testament": "NT", "group": "gospel" },' +
+        //'{ "name": "Evangelium nach Matthäus",  "abbr":"Mt",  "chapters":28, "verses":1071, "year": 57, "yearTo": 59,
+        // "keyword": "Königreich", "mainIdea": "Jesus: König u. Messias", "keyVerse": "1:1",
+        // "author": "Matthäus", "testament": "NT", "group": "gospel" },' +
 
         object Book : Entity() {
             val name = prop()

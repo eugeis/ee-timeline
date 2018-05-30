@@ -1,6 +1,6 @@
 package ee.timeline
 
-import ee.design.Basic
+import ee.lang.Basic
 import ee.design.Comp
 import ee.design.Entity
 import ee.design.Module

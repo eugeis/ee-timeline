@@ -58,9 +58,9 @@ fun Phase.sortByDates(): Phase {
 fun Phase.fillTimeEvents(timeEvents: TimeEvents, parent: Phase? = null): TimeEvents {
     val group = parent?.name?.name ?: ""
     val groupAuthors = when (group) {
-        "Liberale"   -> "Spekulationstheologen"
+        "Liberale" -> "Spekulationstheologen"
         "bibeltreue" -> "Offenbarungstheologen"
-        else         -> {
+        else -> {
             "$group Vertreter"
         }
     }
@@ -91,8 +91,9 @@ fun Phase.fillTimeEvents(timeEvents: TimeEvents, parent: Phase? = null): TimeEve
         val authors = phase.authors.map { author ->
             val fullName = author.fullName()
             """<a href="#event-${fullName.toUrlKey()}" onclick="timeline.goToId('${fullName.toUrlKey()}');">$fullName</a>"""
-        }.joinSurroundIfNotEmptyToString(prefix = """<br><p>Vertreter:</p><ul class="author">""", postfix = "</ul>",
-                separator = "\n    ") { "<li>$it</li>" }
+        }.joinSurroundIfNotEmptyToString(prefix = """<br><p>Vertreter:</p><ul class="author">""",
+            postfix = "</ul>",
+            separator = "\n    ") { "<li>$it</li>" }
         val description = phase.description.split('\n')
             .joinToString(prefix = "<p>Charakteristika:</p>\n<ul>", postfix = "</ul>",
                 separator = "\n    ") { "<li>$it</li>" }

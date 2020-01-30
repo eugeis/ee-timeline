@@ -17,3 +17,7 @@ gradle-app.setting
 /.idea/
 /**/*.iml
 /build.gradle
+/ee-timeline/out/production/classes/
+/ee-timeline_des/out/production/classes/
+/ee-timeline_excel/out/production/classes/
+/ee-timeline_json/out/production/classes/

@@ -21,3 +21,17 @@ gradle-app.setting
 /ee-timeline_des/out/production/classes/
 /ee-timeline_excel/out/production/classes/
 /ee-timeline_json/out/production/classes/
+/ee-timeline_json/.settings/
+/ee-timeline_json/.classpath
+/ee-timeline_json/.project
+/ee-timeline_excel/.settings/
+/ee-timeline_excel/.classpath
+/ee-timeline_excel/.project
+/ee-timeline_des/.settings/
+/ee-timeline_des/.classpath
+/ee-timeline_des/.project
+/ee-timeline/.settings/
+/ee-timeline/.classpath
+/ee-timeline/.project
+/.settings/
+/.classpath
